@@ -1,11 +1,21 @@
 <template>
   <div class="home">
-    
     <h1>Recipe Box</h1>
-         <Loader v-if="recipes.loading" />
-      <ul v-if="!recipes.loading" class="recipe-list">
-        <li v-for="(recipe,index) in recipes.list[0]" :key="index"  v-bind:style="index%2===0 ? li : ''" @click="Show(index)">{{recipe.recipe}}</li> 
-      </ul>
+    <Loader v-if="recipes.loading" />
+    <div class="search-wrapper">
+      <label>Search:</label>
+      <input type="text" v-model="search" placeholder="Search title.." />
+    </div>
+    <ul v-if="!recipes.loading" class="recipe-list">
+      <li
+        v-for="(recipe, index) in SearchFilter"
+        :key="index"
+        v-bind:style="index % 2 === 0 ? li : ''"
+        @click="Show(index)"
+      >
+        {{ recipe.recipe }}
+      </li>
+    </ul>
     <div class="buttons">
       <button v-on:click="Hide">X</button>
       <div v-if="hide">Buna treaba!</div>
@@ -18,85 +28,125 @@ import Loader from "../components/Spinner.vue";
 
 export default {
   name: "home",
-   components:{
-    Loader
+  components: {
+    Loader,
   },
   data: () => {
     return {
+      search:"",
       hide: true,
       li: {
-    backgroundColor:"rgb(33, 126, 163)",
-  },
-  
+        backgroundColor: "rgb(33, 126, 163)",
+      },
+
       itemList: [
-        { recipe: 'Scrambled Eggs', ingredients: ['Eggs','Sunflower Oil'], directions: ['Do step 1','Do step 2']},
-        { recipe: 'Chocolate Cake', ingredients: ['Eggs','Flour','Milk'], directions: ['Do step 1','Do step 2','Do step 3']}, 
-        { recipe: 'Vanilla Cake', ingredients: ['Eggs','Flour','Milk', 'Vanilla'], directions: ['Do step 1','Do step 2','Do step 3']},   
-        { recipe: 'Scrambled Eggs', ingredients: ['Eggs','Sunflower Oil'], directions: ['Do step 1','Do step 2']},       ],
-      recipes:{loading:true,list:[]},
-     
+        {
+          recipe: "Scrambled Eggs",
+          ingredients: ["Eggs", "Sunflower Oil"],
+          directions: ["Do step 1", "Do step 2"],
+        },
+        {
+          recipe: "Chocolate Cake",
+          ingredients: ["Eggs", "Flour", "Milk"],
+          directions: ["Do step 1", "Do step 2", "Do step 3"],
+        },
+        {
+          recipe: "Vanilla Cake",
+          ingredients: ["Eggs", "Flour", "Milk", "Vanilla"],
+          directions: ["Do step 1", "Do step 2", "Do step 3"],
+        },
+        {
+          recipe: "Scrambled Eggs",
+          ingredients: ["Eggs", "Sunflower Oil"],
+          directions: ["Do step 1", "Do step 2"],
+        },
+      ],
+      recipes: { loading: true, list: [] },
     };
   },
-  created: function () {
-    if(localStorage.recipes){
+  created: function() {
+    if (localStorage.recipes) {
+      /*if we find data into the localstorage we push it to our array */
       this.recipes.list.push(JSON.parse(localStorage.recipes));
-      console.log(this.recipes);
-      this.recipes.loading=false;
-    }
-    else{
+      this.recipes.loading = false;
+    } else {
+      /* if local storage is empty we add a list of recipes*/
       this.recipes.list.push(this.itemList);
-      localStorage.setItem("recipes",JSON.stringify(this.itemList))
-      this.recipes.loading=false;
+      localStorage.setItem("recipes", JSON.stringify(this.itemList));
+      this.recipes.loading = false;
     }
-    console.log(this.recipes)
+    console.log(this.recipes);
   },
   methods: {
     Show: function(number) {
-      console.log(number)
-      
+      console.log(number);
     },
     Hide: function() {
-      this.hide=!this.hide;
-      
-    }
+      this.hide = !this.hide;
+    },
+    
   },
+  computed: {
+SearchFilter: function(){
  
+  if(!this.search)
+  {
+ 
+  return this.recipes.list[0];
+  }
+  return this.recipes.list[0].filter((recipe) => {
+    /* splited the words separated by a comma */
+    var searchedIngredients = this.search.trim().split(',');
+    var ingredients = recipe.ingredients
+      for (var i = 0; i < ingredients.length; i++) {
+        for(var y = 0; y< searchedIngredients.length; y++){
+        if (searchedIngredients[y] && ingredients[i].toLowerCase().includes(searchedIngredients[y].trim())) {
+          return true;
+        }
+        }
+      }
+    });
+}
 
-  
+}
+
 };
 </script>
 
 <style lang="css" scoped>
 .home {
-  
   position: relative;
   color: rgb(255, 255, 255);
- 
 }
-.home h1{
+.home h1 {
   text-align: center;
-font-size: 4rem;
-font-family: 'Lobster', cursive;
+  font-size: 4rem;
+  font-family: "Lobster", cursive;
 }
-.home ul{
+.home .search-wrapper{
+  text-align: center;
+}
+.home ul {
   background-color: rgb(28, 63, 116);
   border-radius: 10px;
+  border: 5px solid rgb(28, 63, 116);
   overflow: auto;
   list-style-type: none;
-  height:100px;
-  width:70%;
+  height: 100px;
+  width: 70%;
   padding: 20px 10px;
-  padding-bottom: 30px;
-  margin:0 auto;
+
+  margin: 0 auto;
 }
-.home ul li{
+.home ul li {
   cursor: pointer;
   padding: 12px 10px;
+  margin: 5px 5px;
   font-size: 0.9rem;
-font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.home ul li:hover{
-  color:rgb(38, 72, 124);
+.home ul li:hover {
+  color: rgb(38, 72, 124);
 }
 </style>

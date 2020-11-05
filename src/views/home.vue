@@ -11,10 +11,10 @@
       <li
         v-for="(recipe, index) in SearchFilter"
         :key="index"
-        v-bind:style="index % 2 === 0 ? li : ''"
         @click="DetailIngredient(index)"
       >
-        {{ recipe.recipe }}
+        <h3>{{ recipe.recipe }}</h3>
+        <p>{{recipe.description}}</p>
       </li>
     </ul>
     <Details :number="number" :recipes="SearchFilter" />
@@ -40,28 +40,30 @@ export default {
       search: "",
       hide: true,
       number:0,
-      li: {
-        backgroundColor: "rgb(33, 126, 163)",
-      },
+     
 
       itemList: [
         {
           recipe: "Scrambled Eggs",
-          ingredients: ["Eggs", "Sunflower Oil"],
+          description:"Scrambled eggs is a dish made from eggs (usually chicken eggs) stirred or beaten together while being gently heated, typically with salt, butter and sometimes other ingredients.",
+          ingredients: ["4 large EGGS", "Sunflower Oil", "1 pinch salt", "1 pinch pepper"],
           directions: ["Do step 1", "Do step 2"],
         },
         {
           recipe: "Chocolate Cake",
+          description:"Chocolate cake or chocolate gâteau (from French: gâteau au chocolat) is a cake flavored with melted chocolate, cocoa powder, or both.",
           ingredients: ["Eggs", "Flour", "Milk", "Chocolate"],
           directions: ["Do step 1", "Do step 2", "Do step 3"],
         },
         {
           recipe: "Vanilla Cake",
+          description:"Chocolate cake or chocolate gâteau (from French: gâteau au chocolat) is a cake flavored with melted chocolate, cocoa powder, or both.",
           ingredients: ["Eggs", "Flour", "Milk", "Vanilla"],
           directions: ["Do step 1", "Do step 2", "Do step 3"],
         },
         {
           recipe: "Scrambled Eggs",
+          description:"Eggs are prepared at home usually.",
           ingredients: ["Eggs", "Sunflower Oil"],
           directions: ["Do step 1", "Do step 2"],
         },
@@ -149,23 +151,35 @@ export default {
   background-color: rgb(28, 63, 116);
   border-radius: 10px;
   border: 5px solid rgb(28, 63, 116);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-column-gap:50px;
+  grid-row-gap:30px;
   overflow: auto;
   list-style-type: none;
-  height: 100px;
-  width: 50%;
+  height: 200px;
+  width: 60%;
   min-width: 300px;
   padding: 20px 10px;
   margin: 0 auto;
 }
 .home ul li {
+  display: flex;
+  flex-direction: column;
+  border:1px solid black;
+  border-radius: 15px;
   cursor: pointer;
-  padding: 12px 10px;
-  margin: 5px 5px;
+  padding: 5px 20px;
+  margin: 0px 5px;
   font-size: 0.9rem;
   font-family: "Roboto", sans-serif;
+  transition: 0.4s;
 }
 
 .home ul li:hover {
   color: rgb(38, 72, 124);
+}
+.home ul li h3{
+  font-size: 1.3rem;
 }
 </style>

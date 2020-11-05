@@ -22,4 +22,15 @@ export default {
     border-bottom-left-radius: 10px;
     padding: 10px;
 }
+
+.add button{
+    position: relative;
+    cursor: pointer;
+    border:none;
+    padding: 5px 10px;
+}
+.add button:active{
+    top:1px;
+    bottom:1px;
+}
 </style>

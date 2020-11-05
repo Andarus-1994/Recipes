@@ -65,4 +65,7 @@ export default {
     list-style-type: none;
     margin:30px 0;
 }
+.details ul:nth-of-type(2){
+    list-style-type: decimal;
+}
 </style>

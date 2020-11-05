@@ -1,4 +1,4 @@
-# firstapp
+# Recipes
 
 ## Project setup
 ```

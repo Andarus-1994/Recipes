@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <h1>Recipe Box</h1>
-    <Loader v-if="recipes.loading" />
     <div class="search-wrapper">
       <label>Search:</label>
       <input type="text" v-model="search" placeholder="Search title.." />
       <label>Example of search: "flour,eggs,chocolate"</label>
     </div>
+     <Loader v-if="recipes.loading" />
     <ul v-if="!recipes.loading" class="recipe-list">
       <li
         v-for="(recipe, index) in SearchFilter"
@@ -148,20 +148,20 @@ export default {
 }
 
 .home ul {
-  background-color: rgb(28, 63, 116);
+  background-color: rgb(37, 129, 165);
   border-radius: 10px;
-  border: 5px solid rgb(28, 63, 116);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-column-gap:50px;
   grid-row-gap:30px;
-  overflow: auto;
   list-style-type: none;
-  height: 200px;
+  overflow:auto;
+  height:200px;
   width: 60%;
-  min-width: 300px;
-  padding: 20px 10px;
+  min-width: 400px;
+  padding: 30px 10px;
   margin: 0 auto;
+  box-shadow: 0px 0px 2px 0px black;
 }
 .home ul li {
   display: flex;
@@ -173,11 +173,13 @@ export default {
   margin: 0px 5px;
   font-size: 0.9rem;
   font-family: "Roboto", sans-serif;
-  transition: 0.4s;
+  box-shadow: 0px 0px 2px 0px black;
+  transition: 0.6s;
 }
 
 .home ul li:hover {
   color: rgb(38, 72, 124);
+   box-shadow: inset 0px 0px 6px black;
 }
 .home ul li h3{
   font-size: 1.3rem;

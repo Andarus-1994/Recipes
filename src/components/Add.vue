@@ -33,7 +33,7 @@ export default {
   name: "add",
    data: () => {
     return {
-      hide: true,
+      hide: false,
       recipe:{name:"",description:"", ingredients:[],directions:[]}
     };
    },

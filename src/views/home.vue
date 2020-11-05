@@ -5,17 +5,19 @@
     <div class="search-wrapper">
       <label>Search:</label>
       <input type="text" v-model="search" placeholder="Search title.." />
+      <label>Example of search: "flour,eggs,chocolate"</label>
     </div>
     <ul v-if="!recipes.loading" class="recipe-list">
       <li
         v-for="(recipe, index) in SearchFilter"
         :key="index"
         v-bind:style="index % 2 === 0 ? li : ''"
-        @click="Show(index)"
+        @click="DetailIngredient(index)"
       >
         {{ recipe.recipe }}
       </li>
     </ul>
+    <Details :number="number" :recipes="SearchFilter" />
     <div class="buttons">
       <button v-on:click="Hide">X</button>
       <div v-if="hide">Buna treaba!</div>
@@ -25,16 +27,19 @@
 
 <script>
 import Loader from "../components/Spinner.vue";
+import Details from "../components/Details.vue";
 
 export default {
   name: "home",
   components: {
     Loader,
+    Details
   },
   data: () => {
     return {
-      search:"",
+      search: "",
       hide: true,
+      number:0,
       li: {
         backgroundColor: "rgb(33, 126, 163)",
       },
@@ -47,7 +52,7 @@ export default {
         },
         {
           recipe: "Chocolate Cake",
-          ingredients: ["Eggs", "Flour", "Milk"],
+          ingredients: ["Eggs", "Flour", "Milk", "Chocolate"],
           directions: ["Do step 1", "Do step 2", "Do step 3"],
         },
         {
@@ -78,38 +83,38 @@ export default {
     console.log(this.recipes);
   },
   methods: {
-    Show: function(number) {
+    DetailIngredient: function(number) {
+      this.number = number;
       console.log(number);
     },
     Hide: function() {
       this.hide = !this.hide;
     },
-    
   },
   computed: {
-SearchFilter: function(){
- 
-  if(!this.search)
-  {
- 
-  return this.recipes.list[0];
-  }
-  return this.recipes.list[0].filter((recipe) => {
-    /* splited the words separated by a comma */
-    var searchedIngredients = this.search.trim().split(',');
-    var ingredients = recipe.ingredients
-      for (var i = 0; i < ingredients.length; i++) {
-        for(var y = 0; y< searchedIngredients.length; y++){
-        if (searchedIngredients[y] && ingredients[i].toLowerCase().includes(searchedIngredients[y].trim())) {
-          return true;
-        }
-        }
+    SearchFilter: function() {
+      if (!this.search) {
+        return this.recipes.list[0];
       }
-    });
-}
-
-}
-
+      return this.recipes.list[0].filter((recipe) => {
+        /* splited the words separated by a comma */
+        var searchedIngredients = this.search.trim().split(",");
+        var ingredients = recipe.ingredients;
+        for (var i = 0; i < ingredients.length; i++) {
+          for (var y = 0; y < searchedIngredients.length; y++) {
+            if (
+              searchedIngredients[y] &&
+              ingredients[i]
+                .toLowerCase()
+                .includes(searchedIngredients[y].trim())
+            ) {
+              return true;
+            }
+          }
+        }
+      });
+    },
+  },
 };
 </script>
 
@@ -123,9 +128,23 @@ SearchFilter: function(){
   font-size: 4rem;
   font-family: "Lobster", cursive;
 }
-.home .search-wrapper{
-  text-align: center;
+.home .search-wrapper {
+  width: 50%;
+  font-family: "Roboto", sans-serif;
+  margin: 30px auto;
 }
+
+.home .search-wrapper label {
+  font-size: 1rem;
+  padding: 10px 15px;
+  color: rgb(19, 61, 88);
+}
+.home .search-wrapper input {
+  font-size: 1rem;
+  padding: 5px 10px;
+  color: rgb(19, 61, 88);
+}
+
 .home ul {
   background-color: rgb(28, 63, 116);
   border-radius: 10px;
@@ -133,9 +152,9 @@ SearchFilter: function(){
   overflow: auto;
   list-style-type: none;
   height: 100px;
-  width: 70%;
+  width: 50%;
+  min-width: 300px;
   padding: 20px 10px;
-
   margin: 0 auto;
 }
 .home ul li {

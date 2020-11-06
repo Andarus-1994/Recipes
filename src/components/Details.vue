@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-      
+    <Modify />  
     <h1>{{ recipes[number].recipe }}</h1>
      
     <div>
@@ -29,10 +29,12 @@
 
 <script>
 import Add from "./Add";
+import Modify from "./Modify";
 
 export default {
   name: "recipeInfor",
     components: {
+    Modify,
     Add
   },
   props: {
@@ -48,13 +50,11 @@ export default {
 
 <style lang="css" scoped>
 .details {
-  
   font-family: "Roboto", sans-serif;
   border-radius: 10px;
   list-style-type: none;
-  width: 51%;
+  width: 60%;
   min-width: 300px;
-  padding-top:20px;
   margin: 20px auto;
   box-shadow: 0px 0px 5px 2px black;
 }

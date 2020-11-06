@@ -1,6 +1,6 @@
 <template>
   <div class="add">
-    <button @click="hide = !hide"><font-awesome-icon icon="plus" /></button>
+    <button @click="hide = !hide, recipe={}"><font-awesome-icon icon="plus" /></button>
     <div v-if="hide" class="AddTemplate">
       <button @click="hide = !hide" style="float: right">X</button>
       <h2>New Recipe</h2>
@@ -14,6 +14,7 @@
               placeholder="Recipe..."
               required
             />
+            <label v-if="duplicateError">Recipe already added!</label>
           </div>
           <div class="wrapperInput">
             <label>Description:</label>
@@ -62,6 +63,7 @@ export default {
       hide: false,
       loadOn: false,
       recipe: { recipe: "", description: "", ingredients: [], directions: [] },
+      duplicateError: false,
       Ingredients: "",
       Directions: "",
     };
@@ -69,21 +71,37 @@ export default {
   components: {
     Loader,
   },
+  created: function() {
+    console.log(this.recipes[0].length);
+  },
   methods: {
-    addRecipe: function () {
-      var localRecipes;
-      this.recipe.ingredients = this.Ingredients.trim().split("/");
-      this.recipe.directions = this.Directions.trim().split("/");
-      if (!localStorage["recipes"]) localRecipes = [];
-      else localRecipes = JSON.parse(localStorage["recipes"]);
-      if (!(localRecipes instanceof Array)) localRecipes = [];
-      localRecipes.push(this.recipe);
-      this.recipes[0].push(this.recipe);
-      localStorage.setItem("recipes", JSON.stringify(localRecipes));
-      this.loadOn = true;
-      setTimeout(() => {
-        (this.hide = false), (this.loadOn = false);
-      }, 500);
+    addRecipe: function() {
+      this.checkDuplicate();
+      if (!this.duplicateError) {
+        var localRecipes;
+        this.recipe.ingredients = this.Ingredients.trim().split("/");
+        this.recipe.directions = this.Directions.trim().split("/");
+        if (!localStorage["recipes"]) localRecipes = [];
+        else localRecipes = JSON.parse(localStorage["recipes"]);
+        if (!(localRecipes instanceof Array)) localRecipes = [];
+        localRecipes.push(this.recipe);
+        this.recipes[0].push(this.recipe);
+        localStorage.setItem("recipes", JSON.stringify(localRecipes));
+        this.loadOn = true;
+        this.recipe={}
+        setTimeout(() => {
+          (this.hide = false), (this.loadOn = false);
+        }, 500);
+      }
+    },
+    checkDuplicate: function() {
+      this.duplicateError = false;
+      for (var i = 0; i < this.recipes[0].length; i++) {
+        if (this.recipe.recipe === this.recipes[0][i].recipe) {
+          this.duplicateError = true;
+          break;
+        }
+      }
     },
   },
 };

@@ -1,10 +1,10 @@
 <template>
   <div class="details">
-    <Modify />  
-    <h1>{{ recipes[number].recipe }}</h1>
+    <Modify :number="number" :recipes="allRecipes" />  
+    <h1 v-if="recipes[number]">{{ recipes[number].recipe }}</h1>
      
     <div>
-      <ul>
+      <ul v-if="recipes[number]">
         <h1>Ingredients:</h1>
         <li
           v-for="(ingredient, index) in recipes[number].ingredients"
@@ -42,9 +42,7 @@ export default {
     recipes: Array,
     allRecipes:Array,
   },
-  created: function() {
-    console.log(this.recipes[this.number]);
-  },
+  
 };
 </script>
 

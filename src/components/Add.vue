@@ -29,7 +29,7 @@
             <textarea
               type="text"
               v-model="Ingredients"
-              placeholder="Ingredients"
+              placeholder="Separate them with '/'                      Write Ingredients"
               required
             />
           </div>
@@ -38,9 +38,11 @@
             <textarea
               type="text"
               v-model="Directions"
-              placeholder="Separate them with '/'            Write Directions"
+              placeholder="Separate them with '/'                    Write Directions"
+              required
             />
           </div>
+          <Loader v-if="loadOn" />
           <input type="submit" value="Add Recipe" />
         </form>
       </div>
@@ -49,6 +51,7 @@
 </template>
 
 <script>
+import Loader from "./Spinner.vue";
 export default {
   name: "add",
   props: {
@@ -57,10 +60,14 @@ export default {
   data: () => {
     return {
       hide: false,
+      loadOn:false,
       recipe: { recipe: "", description: "", ingredients: [], directions: [] },
       Ingredients:"",
       Directions:"",
     };
+  },
+  components: {
+    Loader,
   },
   created: function() {
     console.log("I am here");
@@ -77,6 +84,8 @@ export default {
         localRecipes.push(this.recipe);
         this.recipes[0].push(this.recipe);
        localStorage.setItem("recipes", JSON.stringify(localRecipes));
+       this.loadOn = true;
+       setTimeout(() => {this.hide = false, this.loadOn=false}, 500);
       console.log("merge");
     },
   },
@@ -105,11 +114,11 @@ export default {
   bottom: 1px;
 }
 .add .AddTemplate {
-  position: absolute;
-  background: rgb(36, 73, 128);
+  position: fixed;
+  background: rgb(50, 109, 158);
   border: 1px solid black;
   width: 450px;
-  top: -500px;
+  top: 15% ;
   padding-bottom: 10px;
   right: 0;
   left: 0;

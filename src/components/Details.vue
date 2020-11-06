@@ -48,14 +48,15 @@ export default {
 
 <style lang="css" scoped>
 .details {
-  background-color: rgb(28, 63, 116);
+  
   font-family: "Roboto", sans-serif;
   border-radius: 10px;
   list-style-type: none;
   width: 51%;
   min-width: 300px;
   padding-top:20px;
-  margin: 5px auto;
+  margin: 20px auto;
+  box-shadow: 0px 0px 5px 2px black;
 }
 
 .details h1{

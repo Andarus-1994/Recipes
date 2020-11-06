@@ -1,8 +1,9 @@
 <template>
   <div class="change">
+    <button @click="popChange" style="float: right">X</button>
     <h2>Modify your recipe...</h2>
     <div class="Inputs">
-      <form @submit.prevent="addRecipe">
+      <form @submit.prevent="changeRecipe">
         <div class="wrapperInput">
           <label>Recipe name:</label>
           <input
@@ -11,7 +12,6 @@
             placeholder="Recipe..."
             required
           />
-          <label v-if="duplicateError">Recipe already added!</label>
         </div>
         <div class="wrapperInput">
           <label>Description:</label>
@@ -53,15 +53,16 @@ export default {
     return {
       Ingredients: "",
       Directions: "",
-      duplicateError: false,
     };
   },
   props: {
     number: Number,
     recipes: Array,
+    popChange: Function,
   },
 
   created: function() {
+    console.log(this.recipes[0]);
     this.Ingredients = this.recipes[0][this.number].ingredients
       .toString()
       .replace(/,/g, "/");
@@ -73,15 +74,20 @@ export default {
   methods: {
     changeRecipe: function() {
       console.log("ready!");
-    },
-    checkDuplicate: function() {
-      this.duplicateError = false;
-      for (var i = 0; i < this.recipes[0].length; i++) {
-        if (this.recipe.recipe === this.recipes[0][i].recipe) {
-          this.duplicateError = true;
-          break;
-        }
-      }
+      var localRecipes;
+      this.recipes[0][this.number].ingredients = this.Ingredients.trim().split(
+        "/"
+      );
+      this.recipes[0][this.number].directions = this.Directions.trim().split(
+        "/"
+      );
+      this.recipes[0][this.number] = this.recipes[0][this.number];
+      if (!localStorage["recipes"]) localRecipes = [];
+      else localRecipes = JSON.parse(localStorage["recipes"]);
+      if (!(localRecipes instanceof Array)) localRecipes = [];
+      localRecipes[this.number] = this.recipes[0][this.number];
+      localStorage.setItem("recipes", JSON.stringify(localRecipes));
+      this.popChange();
     },
   },
 };

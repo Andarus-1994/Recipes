@@ -1,30 +1,40 @@
 <template>
   <div class="modify">
-    <button><font-awesome-icon icon="edit" /></button>
-    <button @click="deleteRecipe"><font-awesome-icon icon="trash" /></button>
+    <button @click="popChangeBox"><font-awesome-icon icon="edit" /></button>
+    <button @click="popDeleteConfirmation">
+      <font-awesome-icon icon="trash" />
+    </button>
+    <Change
+      v-if="!hide.modify"
+      :popChange="popChangeBox"
+      :recipes="recipes"
+      :number="number"
+    />
     <ConfirmationBox
-      v-if="!hide"
+      v-if="!hide.delete"
       :confirmation="confirm"
       :recipe="recipes"
       :number="number"
-      :deleteFunction="deleteRecipe"
+      :popDelete="popDeleteConfirmation"
     />
   </div>
 </template>
 
 <script>
 import ConfirmationBox from "./ConfirmationBox";
+import Change from "./Change";
 
 export default {
   name: "modify",
   data: () => {
     return {
-      hide: true,
+      hide: { modify: true, delete: true },
       confirm: false,
     };
   },
   components: {
     ConfirmationBox,
+    Change,
   },
 
   props: {
@@ -35,8 +45,11 @@ export default {
     console.log(this.recipes[0][this.number]);
   },
   methods: {
-    deleteRecipe: function() {
-      this.hide = !this.hide;
+    popDeleteConfirmation: function() {
+      this.hide.delete = !this.hide.delete;
+    },
+    popChangeBox: function() {
+      this.hide.modify = !this.hide.modify;
     },
   },
 };

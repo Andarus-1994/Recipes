@@ -7,7 +7,7 @@
     </p>
     <div class="buttons">
       <button @click="deleteRecipe">Yes</button>
-      <button @click="deleteFunction">No</button>
+      <button @click="popDelete">No</button>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     confirmation: Boolean,
     recipe: Array,
     number: Number,
-    deleteFunction: Function,
+    popDelete: Function,
   },
 
   methods: {
@@ -31,8 +31,7 @@ export default {
         .concat(localRecipe.slice(this.number + 1, localRecipe.length));
       localStorage.setItem("recipes", JSON.stringify(deleteRecipe));
       this.recipe[0].splice(this.number, 1);
-      this.deleteFunction();
-      console.log("Delete!");
+      this.popDelete();
     },
   },
 };

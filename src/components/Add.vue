@@ -2,7 +2,7 @@
   <div class="add">
     <button @click="hide = !hide"><font-awesome-icon icon="plus" /></button>
     <div v-if="hide" class="AddTemplate">
-      <button @click="hide = !hide" style="float:right">X</button>
+      <button @click="hide = !hide" style="float: right">X</button>
       <h2>New Recipe</h2>
       <div class="Inputs">
         <form @submit.prevent="addRecipe">
@@ -55,38 +55,35 @@ import Loader from "./Spinner.vue";
 export default {
   name: "add",
   props: {
-    recipes:Array,
+    recipes: Array,
   },
   data: () => {
     return {
       hide: false,
-      loadOn:false,
+      loadOn: false,
       recipe: { recipe: "", description: "", ingredients: [], directions: [] },
-      Ingredients:"",
-      Directions:"",
+      Ingredients: "",
+      Directions: "",
     };
   },
   components: {
     Loader,
   },
-  created: function() {
-    console.log("I am here");
-    console.log(this.recipes);
-  },
   methods: {
-    addRecipe: function() {
-        var localRecipes
-        this.recipe.ingredients = this.Ingredients.trim().split("/");
-        this.recipe.directions = this.Directions.trim().split("/");
-        if (!localStorage['recipes']) localRecipes = [];
-        else localRecipes = JSON.parse(localStorage['recipes']);   
-        if (!(localRecipes instanceof Array)) localRecipes = []; 
-        localRecipes.push(this.recipe);
-        this.recipes[0].push(this.recipe);
-       localStorage.setItem("recipes", JSON.stringify(localRecipes));
-       this.loadOn = true;
-       setTimeout(() => {this.hide = false, this.loadOn=false}, 500);
-      console.log("merge");
+    addRecipe: function () {
+      var localRecipes;
+      this.recipe.ingredients = this.Ingredients.trim().split("/");
+      this.recipe.directions = this.Directions.trim().split("/");
+      if (!localStorage["recipes"]) localRecipes = [];
+      else localRecipes = JSON.parse(localStorage["recipes"]);
+      if (!(localRecipes instanceof Array)) localRecipes = [];
+      localRecipes.push(this.recipe);
+      this.recipes[0].push(this.recipe);
+      localStorage.setItem("recipes", JSON.stringify(localRecipes));
+      this.loadOn = true;
+      setTimeout(() => {
+        (this.hide = false), (this.loadOn = false);
+      }, 500);
     },
   },
 };
@@ -118,7 +115,7 @@ export default {
   background: rgb(50, 109, 158);
   border: 1px solid black;
   width: 450px;
-  top: 15% ;
+  top: 15%;
   padding-bottom: 10px;
   right: 0;
   left: 0;

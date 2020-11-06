@@ -6,7 +6,7 @@
       <input type="text" v-model="search" placeholder="Search title.." />
       <label>Example of search: "flour,eggs,chocolate"</label>
     </div>
-     <Loader v-if="recipes.loading" />
+    <Loader v-if="recipes.loading" />
     <ul v-if="!recipes.loading" class="recipe-list">
       <li
         v-for="(recipe, index) in SearchFilter"
@@ -14,10 +14,14 @@
         @click="DetailIngredient(index)"
       >
         <h3>{{ recipe.recipe }}</h3>
-        <p>{{recipe.description}}</p>
+        <p>{{ recipe.description }}</p>
       </li>
     </ul>
-    <Details :number="number" :recipes="SearchFilter" :allRecipes="recipes.list" />
+    <Details
+      :number="number"
+      :recipes="SearchFilter"
+      :allRecipes="recipes.list"
+    />
     <div class="buttons">
       <button v-on:click="Hide">X</button>
       <div v-if="hide">Buna treaba!</div>
@@ -33,37 +37,44 @@ export default {
   name: "home",
   components: {
     Loader,
-    Details
+    Details,
   },
   data: () => {
     return {
       search: "",
       hide: true,
-      number:0,
-     
+      number: 0,
 
       itemList: [
         {
           recipe: "Scrambled Eggs",
-          description:"Scrambled eggs is a dish made from eggs (usually chicken eggs) stirred or beaten together while being gently heated, typically with salt, butter and sometimes other ingredients.",
-          ingredients: ["4 large EGGS", "Sunflower Oil", "1 pinch salt", "1 pinch pepper"],
+          description:
+            "Scrambled eggs is a dish made from eggs (usually chicken eggs) stirred or beaten together while being gently heated, typically with salt, butter and sometimes other ingredients.",
+          ingredients: [
+            "4 large EGGS",
+            "Sunflower Oil",
+            "1 pinch salt",
+            "1 pinch pepper",
+          ],
           directions: ["Do step 1", "Do step 2"],
         },
         {
           recipe: "Chocolate Cake",
-          description:"Chocolate cake or chocolate gâteau (from French: gâteau au chocolat) is a cake flavored with melted chocolate, cocoa powder, or both.",
+          description:
+            "Chocolate cake or chocolate gâteau (from French: gâteau au chocolat) is a cake flavored with melted chocolate, cocoa powder, or both.",
           ingredients: ["Eggs", "Flour", "Milk", "Chocolate"],
           directions: ["Do step 1", "Do step 2", "Do step 3"],
         },
         {
           recipe: "Vanilla Cake",
-          description:"Chocolate cake or chocolate gâteau (from French: gâteau au chocolat) is a cake flavored with melted chocolate, cocoa powder, or both.",
+          description:
+            "Chocolate cake or chocolate gâteau (from French: gâteau au chocolat) is a cake flavored with melted chocolate, cocoa powder, or both.",
           ingredients: ["Eggs", "Flour", "Milk", "Vanilla"],
           directions: ["Do step 1", "Do step 2", "Do step 3"],
         },
         {
           recipe: "Scrambled Eggs",
-          description:"Eggs are prepared at home usually.",
+          description: "Eggs are prepared at home usually.",
           ingredients: ["Eggs", "Sunflower Oil"],
           directions: ["Do step 1", "Do step 2"],
         },
@@ -71,7 +82,7 @@ export default {
       recipes: { loading: true, list: [] },
     };
   },
-  created: function() {
+  created: function () {
     if (localStorage.recipes) {
       /*if we find data into the localstorage we push it to our array */
       this.recipes.list.push(JSON.parse(localStorage.recipes));
@@ -82,19 +93,17 @@ export default {
       localStorage.setItem("recipes", JSON.stringify(this.itemList));
       this.recipes.loading = false;
     }
-    console.log(this.recipes);
   },
   methods: {
-    DetailIngredient: function(number) {
+    DetailIngredient: function (number) {
       this.number = number;
-      console.log(number);
     },
-    Hide: function() {
+    Hide: function () {
       this.hide = !this.hide;
     },
   },
   computed: {
-    SearchFilter: function() {
+    SearchFilter: function () {
       if (!this.search) {
         return this.recipes.list[0];
       }
@@ -152,11 +161,11 @@ export default {
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-column-gap:50px;
-  grid-row-gap:30px;
+  grid-column-gap: 50px;
+  grid-row-gap: 30px;
   list-style-type: none;
-  overflow:auto;
-  height:200px;
+  overflow: auto;
+  height: 200px;
   width: 60%;
   min-width: 400px;
   padding: 30px 10px;
@@ -166,11 +175,11 @@ export default {
 .home ul li {
   display: flex;
   flex-direction: column;
-  border:1px solid black;
+  border: 1px solid black;
   border-radius: 15px;
   cursor: pointer;
   padding: 5px 20px;
-  min-height:200px;
+  min-height: 200px;
   margin: 0px 5px;
   font-size: 0.9rem;
   font-family: "Roboto", sans-serif;
@@ -180,9 +189,9 @@ export default {
 
 .home ul li:hover {
   color: rgb(38, 72, 124);
-   box-shadow: inset 0px 0px 6px black;
+  box-shadow: inset 0px 0px 6px black;
 }
-.home ul li h3{
+.home ul li h3 {
   font-size: 1.3rem;
 }
 </style>

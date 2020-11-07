@@ -18,6 +18,7 @@
       </li>
     </ul>
     <Details
+      v-if="!recipe.loading"
       :number="number"
       :recipes="SearchFilter"
       :allRecipes="recipes.list"
@@ -43,8 +44,9 @@ export default {
     return {
       search: "",
       hide: true,
+      /* I use this to keep the track on selected recipe index */
       number: 0,
-
+      /* Here is an item list that I use as example in case the Recipe Storage is empty */
       itemList: [
         {
           recipe: "Scrambled Eggs",
@@ -82,7 +84,7 @@ export default {
       recipes: { loading: true, list: [] },
     };
   },
-  created: function() {
+  created: function () {
     if (localStorage.recipes) {
       /*if we find data into the local storage we push it to our array */
       this.recipes.list.push(JSON.parse(localStorage.recipes));
@@ -95,15 +97,16 @@ export default {
     }
   },
   methods: {
-    DetailIngredient: function(number) {
+    DetailIngredient: function (number) {
       this.number = number;
     },
-    Hide: function() {
+    Hide: function () {
       this.hide = !this.hide;
     },
   },
   computed: {
-    SearchFilter: function() {
+    SearchFilter: function () {
+      /* If the search input is empty we return the entire list */
       if (!this.search) {
         return this.recipes.list[0];
       }

@@ -69,17 +69,18 @@ export default {
   },
 
   created: function () {
+    /* replaced the comma with a "/" in ingredients and directions in order to display them to the user (they are in an UL displayed) */
     this.Ingredients = this.recipes[0][this.number].ingredients
       .toString()
       .replace(/,/g, "/");
     this.Directions = this.recipes[0][this.number].directions
       .toString()
       .replace(/,/g, "/");
+    /* here we save the initial recipe in case the user doesn't want to make a change anymore */
     this.initialRecipe.recipe = this.recipes[0][this.number].recipe;
     this.initialRecipe.description = this.recipes[0][this.number].description;
     this.initialRecipe.ingredients = this.recipes[0][this.number].ingredients;
     this.initialRecipe.directions = this.recipes[0][this.number].directions;
-    console.log(this.initialRecipe);
   },
   methods: {
     changeRecipe: function () {
@@ -99,6 +100,7 @@ export default {
       this.popChange();
     },
     Close: function () {
+      /* here we assign the initial values and close the form */
       this.recipes[0][this.number].recipe = this.initialRecipe.recipe;
       this.recipes[0][this.number].description = this.initialRecipe.description;
       this.recipes[0][this.number].ingredients = this.initialRecipe.ingredients;

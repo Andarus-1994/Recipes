@@ -26,7 +26,7 @@ export default {
   },
 
   methods: {
-    deleteRecipe: function() {
+    deleteRecipe: function () {
       var localRecipe = JSON.parse(localStorage["recipes"]);
       var deleteRecipe = localRecipe
         .slice(0, this.number)

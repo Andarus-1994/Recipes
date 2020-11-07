@@ -82,8 +82,8 @@ export default {
       recipes: { loading: true, list: [] },
     };
   },
-  created: function () {
-    if (JSON.parse(localStorage.recipes).length) {
+  created: function() {
+    if (localStorage.recipes) {
       /*if we find data into the local storage we push it to our array */
       this.recipes.list.push(JSON.parse(localStorage.recipes));
       this.recipes.loading = false;
@@ -95,15 +95,15 @@ export default {
     }
   },
   methods: {
-    DetailIngredient: function (number) {
+    DetailIngredient: function(number) {
       this.number = number;
     },
-    Hide: function () {
+    Hide: function() {
       this.hide = !this.hide;
     },
   },
   computed: {
-    SearchFilter: function () {
+    SearchFilter: function() {
       if (!this.search) {
         return this.recipes.list[0];
       }
@@ -178,7 +178,6 @@ export default {
   border: 1px solid black;
   border-radius: 15px;
   cursor: pointer;
-  min-height: 200px;
   padding: 5px 20px;
   margin: 0px 5px;
   font-size: 0.9rem;

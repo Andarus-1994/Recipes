@@ -1,6 +1,9 @@
 <template>
   <div class="modify">
     <button @click="popChangeBox"><font-awesome-icon icon="edit" /></button>
+    <button @click="addRandomRecipe" title="Random Autocompleted Recipe">
+      <font-awesome-icon icon="list-ol" />
+    </button>
     <button @click="popDeleteConfirmation">
       <font-awesome-icon icon="trash" />
     </button>
@@ -23,6 +26,7 @@
 <script>
 import ConfirmationBox from "./ConfirmationBox";
 import Change from "./Change";
+import axios from "axios";
 
 export default {
   name: "modify",
@@ -30,6 +34,7 @@ export default {
     return {
       hide: { modify: true, delete: true },
       confirm: false,
+      mockedRecipes: [],
     };
   },
   components: {
@@ -41,15 +46,32 @@ export default {
     number: Number,
     recipes: Array,
   },
-  created: function () {
-    console.log(this.recipes[0][this.number]);
+  created: function() {
+    axios
+      .get("/api/recipes", {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => (this.mockedRecipes = response.data.recipes))
+      .catch((error) => console.log(error));
   },
   methods: {
-    popDeleteConfirmation: function () {
+    popDeleteConfirmation: function() {
       this.hide.delete = !this.hide.delete;
     },
-    popChangeBox: function () {
+    popChangeBox: function() {
       this.hide.modify = !this.hide.modify;
+    },
+
+    addRandomRecipe: function() {
+      var localRecipes;
+      var n = Math.floor(Math.random() * this.mockedRecipes.length);
+      this.recipes[0].push(this.mockedRecipes[n]);
+      if (!localStorage["recipes"]) localRecipes = [];
+      else localRecipes = JSON.parse(localStorage["recipes"]);
+      if (!(localRecipes instanceof Array)) localRecipes = [];
+      localRecipes.push(this.mockedRecipes[n]);
+      localStorage.setItem("recipes", JSON.stringify(localRecipes));
+      console.log(n);
     },
   },
 };

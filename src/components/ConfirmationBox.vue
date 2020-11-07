@@ -31,7 +31,9 @@ export default {
       var deleteRecipe = localRecipe
         .slice(0, this.number)
         .concat(localRecipe.slice(this.number + 1, localRecipe.length));
-      localStorage.setItem("recipes", JSON.stringify(deleteRecipe));
+      if (deleteRecipe.length)
+        localStorage.setItem("recipes", JSON.stringify(deleteRecipe));
+      else localStorage.removeItem("recipes");
       this.recipe[0].splice(this.number, 1);
       this.popDelete();
     },

@@ -18,7 +18,7 @@
       </li>
     </ul>
     <Details
-      v-if="!recipe.loading"
+      v-if="!recipes.loading"
       :number="number"
       :recipes="SearchFilter"
       :allRecipes="recipes.list"
@@ -87,6 +87,7 @@ export default {
   created: function () {
     if (localStorage.recipes) {
       /*if we find data into the local storage we push it to our array */
+
       this.recipes.list.push(JSON.parse(localStorage.recipes));
       this.recipes.loading = false;
     } else {

@@ -1,8 +1,8 @@
 <template>
   <div class="details">
-    <Modify :number="number" :recipes="allRecipes" />  
+    <Modify :number="number" :recipes="allRecipes" />
     <h1 v-if="recipes[number]">{{ recipes[number].recipe }}</h1>
-     
+
     <div>
       <ul v-if="recipes[number]">
         <h1>Ingredients:</h1>
@@ -23,7 +23,7 @@
         </li>
       </ul>
     </div>
-     <Add :recipes="allRecipes" />
+    <Add :recipes="allRecipes" />
   </div>
 </template>
 
@@ -33,16 +33,15 @@ import Modify from "./Modify";
 
 export default {
   name: "recipeInfor",
-    components: {
+  components: {
     Modify,
-    Add
+    Add,
   },
   props: {
     number: Number,
     recipes: Array,
-    allRecipes:Array,
+    allRecipes: Array,
   },
-  
 };
 </script>
 
@@ -57,15 +56,15 @@ export default {
   box-shadow: 0px 0px 5px 2px black;
 }
 
-.details h1{
-    margin: 5px 10px;
+.details h1 {
+  margin: 5px 10px;
 }
 
-.details ul{
-    list-style-type: none;
-    margin:30px 0;
+.details ul {
+  list-style-type: none;
+  margin: 30px 0;
 }
-.details ul:nth-of-type(2){
-    list-style-type: decimal;
+.details ul:nth-of-type(2) {
+  list-style-type: decimal;
 }
 </style>

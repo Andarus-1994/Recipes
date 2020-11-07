@@ -61,19 +61,16 @@ export default {
     popChange: Function,
   },
 
-  created: function() {
-    console.log(this.recipes[0]);
+  created: function () {
     this.Ingredients = this.recipes[0][this.number].ingredients
       .toString()
       .replace(/,/g, "/");
     this.Directions = this.recipes[0][this.number].directions
       .toString()
       .replace(/,/g, "/");
-    console.log(this.Ingredients);
   },
   methods: {
-    changeRecipe: function() {
-      console.log("ready!");
+    changeRecipe: function () {
       var localRecipes;
       this.recipes[0][this.number].ingredients = this.Ingredients.trim().split(
         "/"

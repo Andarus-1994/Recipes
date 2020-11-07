@@ -41,14 +41,14 @@ export default {
     number: Number,
     recipes: Array,
   },
-  created: function() {
+  created: function () {
     console.log(this.recipes[0][this.number]);
   },
   methods: {
-    popDeleteConfirmation: function() {
+    popDeleteConfirmation: function () {
       this.hide.delete = !this.hide.delete;
     },
-    popChangeBox: function() {
+    popChangeBox: function () {
       this.hide.modify = !this.hide.modify;
     },
   },
@@ -75,7 +75,7 @@ export default {
 }
 .modify button:nth-last-of-type(1) {
   float: right;
-  color: rgb(114, 13, 13);
+  color: rgb(255, 255, 255);
 }
 
 .modify button:nth-last-of-type(2):hover {

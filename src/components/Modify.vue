@@ -7,19 +7,22 @@
     <button @click="popDeleteConfirmation">
       <font-awesome-icon icon="trash" />
     </button>
-    <Change
-      v-if="!hide.modify"
-      :popChange="popChangeBox"
-      :recipes="recipes"
-      :number="number"
-    />
-    <ConfirmationBox
-      v-if="!hide.delete"
-      :confirmation="confirm"
-      :recipe="recipes"
-      :number="number"
-      :popDelete="popDeleteConfirmation"
-    />
+    <transition name="fade">
+      <Change
+        v-if="!hide.modify"
+        :popChange="popChangeBox"
+        :recipes="recipes"
+        :number="number"
+      />
+
+      <ConfirmationBox
+        v-if="!hide.delete"
+        :confirmation="confirm"
+        :recipe="recipes"
+        :number="number"
+        :popDelete="popDeleteConfirmation"
+      />
+    </transition>
   </div>
 </template>
 
@@ -107,5 +110,13 @@ export default {
 }
 .modify button:nth-last-of-type(1):hover {
   transform: scale(1.2);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

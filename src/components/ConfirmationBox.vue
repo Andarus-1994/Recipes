@@ -26,7 +26,7 @@ export default {
   },
 
   methods: {
-    deleteRecipe: function () {
+    deleteRecipe: function() {
       var localRecipe = JSON.parse(localStorage["recipes"]);
       var deleteRecipe = localRecipe
         .slice(0, this.number)
@@ -70,13 +70,13 @@ export default {
   position: relative;
   cursor: pointer;
   color: white;
-  background-color: rgb(20, 48, 66);
+  background-color: rgb(30, 78, 107);
   padding: 10px 25px;
-  border: 1px solid rgb(128, 176, 196);
-  border-radius: 25px;
+  border: none;
+
   font-family: "Roboto", sans-serif;
   font-size: 0.85rem;
-  box-shadow: 0px 0px 1px 0px rgb(209, 227, 241);
+
   margin: 0 10px;
   transition: 0.6s;
 }

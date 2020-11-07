@@ -68,7 +68,7 @@ export default {
     popChange: Function,
   },
 
-  created: function () {
+  created: function() {
     /* replaced the comma with a "/" in ingredients and directions in order to display them to the user (they are in an UL displayed) */
     this.Ingredients = this.recipes[0][this.number].ingredients
       .toString()
@@ -83,7 +83,7 @@ export default {
     this.initialRecipe.directions = this.recipes[0][this.number].directions;
   },
   methods: {
-    changeRecipe: function () {
+    changeRecipe: function() {
       var localRecipes;
       this.recipes[0][this.number].ingredients = this.Ingredients.trim().split(
         "/"
@@ -99,7 +99,7 @@ export default {
       localStorage.setItem("recipes", JSON.stringify(localRecipes));
       this.popChange();
     },
-    Close: function () {
+    Close: function() {
       /* here we assign the initial values and close the form */
       this.recipes[0][this.number].recipe = this.initialRecipe.recipe;
       this.recipes[0][this.number].description = this.initialRecipe.description;
@@ -117,8 +117,9 @@ export default {
   background: -webkit-linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
   background: linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
   padding: 30px 40px;
+  border: 1px solid black;
   width: 400px;
-  top: 25%;
+  top: 20%;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -155,19 +156,29 @@ export default {
 .change .wrapperInput input {
   font-family: "Roboto";
   color: white;
-  background: rgb(16, 50, 94);
+  background: rgb(24, 74, 116);
   border: 1px solid rgb(15, 28, 44);
   padding: 5px;
+  transition: 0.4s;
+}
+.change .wrapperInput input:focus {
+  background: rgb(32, 96, 148);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .change .wrapperInput textarea {
   font-family: "Roboto";
   font-size: 0.85rem;
   color: rgb(255, 255, 255);
-  background: rgb(19, 52, 97);
+  background: rgb(24, 74, 116);
   border: 1px solid rgb(15, 28, 44);
   resize: none;
   padding: 5px;
+  transition: 0.4s;
+}
+.change .wrapperInput textarea:focus {
+  background: rgb(32, 96, 148);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .change input[type="submit"] {
@@ -177,5 +188,9 @@ export default {
   font-family: "Roboto";
   padding: 10px 20px;
   border: none;
+  transition: 0.6s;
+}
+.change input[type="submit"]:hover {
+  background-color: rgb(25, 111, 165);
 }
 </style>

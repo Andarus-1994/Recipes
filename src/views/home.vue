@@ -23,10 +23,7 @@
       :recipes="SearchFilter"
       :allRecipes="recipes.list"
     />
-    <div class="buttons">
-      <button v-on:click="Hide">X</button>
-      <div v-if="hide">Buna treaba!</div>
-    </div>
+    <div class="buttons"></div>
   </div>
 </template>
 
@@ -75,9 +72,15 @@ export default {
           directions: ["Do step 1", "Do step 2", "Do step 3"],
         },
         {
-          recipe: "Scrambled Eggs",
-          description: "Eggs are prepared at home usually.",
-          ingredients: ["Eggs", "Sunflower Oil"],
+          recipe: "CheeseCake",
+          description:
+            "Cheesecake is a sweet dessert consisting of one or more layers. The main, and thickest layer, consists of a mixture of soft, fresh cheese (typically cream cheese or ricotta), eggs, and sugar.",
+          ingredients: [
+            "2 large EGGS",
+            "Four 8-ounce blocks of full-fat cream",
+            "300g Sour Cream",
+            "50g Sugar",
+          ],
           directions: ["Do step 1", "Do step 2"],
         },
       ],
@@ -97,9 +100,10 @@ export default {
       this.recipes.loading = false;
     }
   },
+
   methods: {
-    DetailIngredient: function (number) {
-      this.number = number;
+    DetailIngredient: function (index) {
+      this.number = index;
     },
     Hide: function () {
       this.hide = !this.hide;

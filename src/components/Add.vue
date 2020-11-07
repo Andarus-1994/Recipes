@@ -73,11 +73,11 @@ export default {
   components: {
     Loader,
   },
-  created: function() {
+  created: function () {
     console.log(this.recipes[0].length);
   },
   methods: {
-    addRecipe: function() {
+    addRecipe: function () {
       this.checkDuplicate();
       if (!this.duplicateError) {
         var localRecipes;
@@ -96,7 +96,7 @@ export default {
         }, 500);
       }
     },
-    checkDuplicate: function() {
+    checkDuplicate: function () {
       this.duplicateError = false;
       for (var i = 0; i < this.recipes[0].length; i++) {
         if (this.recipe.recipe === this.recipes[0][i].recipe) {
@@ -134,16 +134,16 @@ export default {
   position: fixed;
   background: -webkit-linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
   background: linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
+  padding: 30px 40px;
   border: 1px solid black;
-  width: 450px;
-  top: 15%;
-  padding-bottom: 10px;
-  right: 0;
+  width: 400px;
+  top: 20%;
   left: 0;
+  right: 0;
   margin-left: auto;
   margin-right: auto;
+  z-index: 10;
   text-align: center;
-  box-shadow: 0px 0px 10px 5px black;
 }
 .add .AddTemplate .wrapperInput {
   margin: 15px 40px;
@@ -154,20 +154,36 @@ export default {
   font-size: 1.2rem;
 }
 .add .AddTemplate .wrapperInput input {
+  font-family: "Roboto";
   color: white;
-  background: rgb(16, 50, 94);
-  border: 1px solid white;
+  background: rgb(24, 74, 116);
+  border: 1px solid rgb(15, 28, 44);
   padding: 5px;
+  transition: 0.4s;
+}
+.add .AddTemplate .wrapperInput input:focus {
+  background: rgb(32, 96, 148);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .add .AddTemplate .wrapperInput textarea {
-  color: white;
-  background: rgb(16, 50, 94);
-  border: 1px solid white;
+  font-family: "Roboto";
+  font-size: 0.85rem;
+  color: rgb(255, 255, 255);
+  background: rgb(24, 74, 116);
+  border: 1px solid rgb(15, 28, 44);
   resize: none;
   padding: 5px;
+  transition: 0.4s;
+}
+.add .AddTemplate .wrapperInput textarea:focus {
+  background: rgb(32, 96, 148);
+  border: 1px solid rgb(0, 0, 0);
 }
 .add .AddTemplate button {
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: rgb(17, 79, 117);
   border: none;
   border-left: 1px solid rgb(0, 0, 0);
@@ -184,5 +200,9 @@ export default {
   font-family: "Roboto";
   padding: 10px 20px;
   border: none;
+  transition: 0.4s;
+}
+.add .AddTemplate input[type="submit"]:hover {
+  background-color: rgb(25, 111, 165);
 }
 </style>

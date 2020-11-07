@@ -1,6 +1,7 @@
 <template>
   <div class="details">
     <Modify :number="number" :recipes="allRecipes" />
+
     <h1 v-if="recipes[number]">{{ recipes[number].recipe }}</h1>
 
     <div>
@@ -23,6 +24,7 @@
         </li>
       </ul>
     </div>
+
     <Add :recipes="allRecipes" />
   </div>
 </template>

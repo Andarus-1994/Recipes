@@ -46,7 +46,7 @@ export default {
     number: Number,
     recipes: Array,
   },
-  created: function() {
+  created: function () {
     axios
       .get("/api/recipes", {
         headers: { "Content-Type": "application/json" },
@@ -55,23 +55,25 @@ export default {
       .catch((error) => console.log(error));
   },
   methods: {
-    popDeleteConfirmation: function() {
+    popDeleteConfirmation: function () {
       this.hide.delete = !this.hide.delete;
     },
-    popChangeBox: function() {
+    popChangeBox: function () {
       this.hide.modify = !this.hide.modify;
     },
 
-    addRandomRecipe: function() {
-      var localRecipes;
-      var n = Math.floor(Math.random() * this.mockedRecipes.length);
-      this.recipes[0].push(this.mockedRecipes[n]);
-      if (!localStorage["recipes"]) localRecipes = [];
-      else localRecipes = JSON.parse(localStorage["recipes"]);
-      if (!(localRecipes instanceof Array)) localRecipes = [];
-      localRecipes.push(this.mockedRecipes[n]);
-      localStorage.setItem("recipes", JSON.stringify(localRecipes));
-      console.log(n);
+    addRandomRecipe: function () {
+      if (this.mockedRecipes.length > 0) {
+        var localRecipes;
+        var n = Math.floor(Math.random() * this.mockedRecipes.length);
+        this.recipes[0].push(this.mockedRecipes[n]);
+        if (!localStorage["recipes"]) localRecipes = [];
+        else localRecipes = JSON.parse(localStorage["recipes"]);
+        if (!(localRecipes instanceof Array)) localRecipes = [];
+        localRecipes.push(this.mockedRecipes[n]);
+        localStorage.setItem("recipes", JSON.stringify(localRecipes));
+        console.log(n);
+      }
     },
   },
 };

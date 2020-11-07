@@ -1,6 +1,8 @@
 <template>
   <div class="add">
-    <button @click="hide = !hide, recipe={}"><font-awesome-icon icon="plus" /></button>
+    <button @click="(hide = !hide), (recipe = {})">
+      <font-awesome-icon icon="plus" />
+    </button>
     <div v-if="hide" class="AddTemplate">
       <button @click="hide = !hide" style="float: right">X</button>
       <h2>New Recipe</h2>
@@ -88,7 +90,7 @@ export default {
         this.recipes[0].push(this.recipe);
         localStorage.setItem("recipes", JSON.stringify(localRecipes));
         this.loadOn = true;
-        this.recipe={}
+        this.recipe = {};
         setTimeout(() => {
           (this.hide = false), (this.loadOn = false);
         }, 500);
@@ -130,7 +132,8 @@ export default {
 }
 .add .AddTemplate {
   position: fixed;
-  background: rgb(50, 109, 158);
+  background: -webkit-linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
+  background: linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
   border: 1px solid black;
   width: 450px;
   top: 15%;
@@ -151,13 +154,35 @@ export default {
   font-size: 1.2rem;
 }
 .add .AddTemplate .wrapperInput input {
-  background: white;
-  border: none;
+  color: white;
+  background: rgb(16, 50, 94);
+  border: 1px solid white;
   padding: 5px;
 }
 
 .add .AddTemplate .wrapperInput textarea {
+  color: white;
+  background: rgb(16, 50, 94);
+  border: 1px solid white;
   resize: none;
   padding: 5px;
+}
+.add .AddTemplate button {
+  background-color: rgb(17, 79, 117);
+  border: none;
+  border-left: 1px solid rgb(0, 0, 0);
+  border-bottom: 1px solid rgb(0, 0, 0);
+  transition: 0.6s;
+}
+.add .AddTemplate button:hover {
+  background-color: rgb(29, 106, 155);
+}
+.add .AddTemplate input[type="submit"] {
+  cursor: pointer;
+  background-color: rgb(17, 79, 117);
+  color: rgb(217, 226, 255);
+  font-family: "Roboto";
+  padding: 10px 20px;
+  border: none;
 }
 </style>

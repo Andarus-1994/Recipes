@@ -1,6 +1,6 @@
 <template>
   <div class="change">
-    <button @click="popChange" style="float: right">X</button>
+    <button @click="Close" style="float: right">X</button>
     <h2>Modify your recipe...</h2>
     <div class="Inputs">
       <form @submit.prevent="changeRecipe">
@@ -49,10 +49,17 @@
 <script>
 export default {
   name: "change",
+
   data: () => {
     return {
       Ingredients: "",
       Directions: "",
+      initialRecipe: {
+        recipe: "",
+        description: "",
+        ingredients: [],
+        directions: [],
+      },
     };
   },
   props: {
@@ -68,6 +75,11 @@ export default {
     this.Directions = this.recipes[0][this.number].directions
       .toString()
       .replace(/,/g, "/");
+    this.initialRecipe.recipe = this.recipes[0][this.number].recipe;
+    this.initialRecipe.description = this.recipes[0][this.number].description;
+    this.initialRecipe.ingredients = this.recipes[0][this.number].ingredients;
+    this.initialRecipe.directions = this.recipes[0][this.number].directions;
+    console.log(this.initialRecipe);
   },
   methods: {
     changeRecipe: function () {
@@ -78,12 +90,19 @@ export default {
       this.recipes[0][this.number].directions = this.Directions.trim().split(
         "/"
       );
-      this.recipes[0][this.number] = this.recipes[0][this.number];
+
       if (!localStorage["recipes"]) localRecipes = [];
       else localRecipes = JSON.parse(localStorage["recipes"]);
       if (!(localRecipes instanceof Array)) localRecipes = [];
       localRecipes[this.number] = this.recipes[0][this.number];
       localStorage.setItem("recipes", JSON.stringify(localRecipes));
+      this.popChange();
+    },
+    Close: function () {
+      this.recipes[0][this.number].recipe = this.initialRecipe.recipe;
+      this.recipes[0][this.number].description = this.initialRecipe.description;
+      this.recipes[0][this.number].ingredients = this.initialRecipe.ingredients;
+      this.recipes[0][this.number].directions = this.initialRecipe.directions;
       this.popChange();
     },
   },
@@ -93,7 +112,8 @@ export default {
 <style lang="css" scoped>
 .change {
   position: fixed;
-  background: rgb(54, 86, 155);
+  background: -webkit-linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
+  background: linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
   padding: 30px 40px;
   width: 400px;
   top: 25%;
@@ -105,6 +125,23 @@ export default {
   text-align: center;
 }
 
+.change button {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  font-size: 1rem;
+  background-color: rgb(17, 79, 117);
+  border: none;
+  border-left: 1px solid rgb(0, 0, 0);
+  border-bottom: 1px solid rgb(0, 0, 0);
+  transition: 0.6s;
+}
+.change button:hover {
+  background-color: rgb(29, 106, 155);
+}
+
 .change .wrapperInput {
   margin: 15px 40px;
   display: flex;
@@ -114,13 +151,29 @@ export default {
   font-size: 1.2rem;
 }
 .change .wrapperInput input {
-  background: white;
-  border: none;
+  font-family: "Roboto";
+  color: white;
+  background: rgb(16, 50, 94);
+  border: 1px solid rgb(15, 28, 44);
   padding: 5px;
 }
 
 .change .wrapperInput textarea {
+  font-family: "Roboto";
+  font-size: 0.85rem;
+  color: rgb(255, 255, 255);
+  background: rgb(19, 52, 97);
+  border: 1px solid rgb(15, 28, 44);
   resize: none;
   padding: 5px;
+}
+
+.change input[type="submit"] {
+  cursor: pointer;
+  background-color: rgb(17, 79, 117);
+  color: rgb(217, 226, 255);
+  font-family: "Roboto";
+  padding: 10px 20px;
+  border: none;
 }
 </style>

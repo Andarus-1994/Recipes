@@ -82,7 +82,7 @@ export default {
       recipes: { loading: true, list: [] },
     };
   },
-  created: function() {
+  created: function () {
     if (JSON.parse(localStorage.recipes).length) {
       /*if we find data into the local storage we push it to our array */
       this.recipes.list.push(JSON.parse(localStorage.recipes));
@@ -95,15 +95,15 @@ export default {
     }
   },
   methods: {
-    DetailIngredient: function(number) {
+    DetailIngredient: function (number) {
       this.number = number;
     },
-    Hide: function() {
+    Hide: function () {
       this.hide = !this.hide;
     },
   },
   computed: {
-    SearchFilter: function() {
+    SearchFilter: function () {
       if (!this.search) {
         return this.recipes.list[0];
       }
@@ -178,8 +178,8 @@ export default {
   border: 1px solid black;
   border-radius: 15px;
   cursor: pointer;
-  padding: 5px 20px;
   min-height: 200px;
+  padding: 5px 20px;
   margin: 0px 5px;
   font-size: 0.9rem;
   font-family: "Roboto", sans-serif;
@@ -192,6 +192,7 @@ export default {
   box-shadow: inset 0px 0px 6px black;
 }
 .home ul li h3 {
-  font-size: 1.3rem;
+  font-size: 1rem;
+  color: rgb(239, 244, 255);
 }
 </style>

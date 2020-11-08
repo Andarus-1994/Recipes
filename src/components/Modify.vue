@@ -17,7 +17,6 @@
 
       <ConfirmationBox
         v-if="!hide.delete"
-        :confirmation="confirm"
         :recipe="recipes"
         :number="number"
         :popDelete="popDeleteConfirmation"
@@ -36,7 +35,7 @@ export default {
   data: () => {
     return {
       hide: { modify: true, delete: true },
-      confirm: false,
+
       mockedRecipes: [],
     };
   },
@@ -59,9 +58,11 @@ export default {
   },
   methods: {
     popDeleteConfirmation: function () {
+      if (!this.hide.modify) this.hide.modify = true;
       this.hide.delete = !this.hide.delete;
     },
     popChangeBox: function () {
+      if (!this.hide.delete) this.hide.delete = true;
       this.hide.modify = !this.hide.modify;
     },
 

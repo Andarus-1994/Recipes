@@ -19,14 +19,13 @@ export default {
   name: "confirmationBox",
 
   props: {
-    confirmation: Boolean,
     recipe: Array,
     number: Number,
     popDelete: Function,
   },
 
   methods: {
-    deleteRecipe: function() {
+    deleteRecipe: function () {
       var localRecipe = JSON.parse(localStorage["recipes"]);
       var deleteRecipe = localRecipe
         .slice(0, this.number)

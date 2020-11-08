@@ -9,7 +9,8 @@ npm install
 ```
 npm run serve
 ```
-Documentation:
+Documentation Recipes:
+
 The main page is formed by one view component that is home.vue which includes all the other components.
 
 At first we can see the search box which has a component on its own named “Search.vue”, then we have the list with the recipes, embedded in the component with the same name “RecipeList.vue”  and in the bottom we have detailed display of a recipe, which is also included in a component called “Details.vue”.

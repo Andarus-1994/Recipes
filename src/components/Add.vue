@@ -32,7 +32,7 @@
             <textarea
               type="text"
               v-model="Ingredients"
-              placeholder="Separate them with '/'                      Write Ingredients"
+              placeholder="Separate them with '/'                          Write Ingredients"
               required
             />
           </div>
@@ -41,7 +41,7 @@
             <textarea
               type="text"
               v-model="Directions"
-              placeholder="Separate them with '/'                    Write Directions"
+              placeholder="Separate them with '/'                          Write Directions"
               required
             />
           </div>
@@ -96,6 +96,7 @@ export default {
         }, 500);
       }
     },
+    /* function to check if we have duplicate name in the recipes */
     checkDuplicate: function () {
       this.duplicateError = false;
       for (var i = 0; i < this.recipes[0].length; i++) {

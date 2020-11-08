@@ -80,7 +80,7 @@ export default {
       recipes: { loading: true, list: [] },
     };
   },
-  created: function() {
+  created: function () {
     if (localStorage.recipes) {
       /*if we find data into the local storage we push it to our array */
 
@@ -95,18 +95,18 @@ export default {
   },
 
   methods: {
-    DetailIngredient: function(index) {
+    DetailIngredient: function (index) {
       this.number = index;
     },
-    Hide: function() {
+    Hide: function () {
       this.hide = !this.hide;
     },
-    SearchWord: function(word) {
+    SearchWord: function (word) {
       this.search = word;
     },
   },
   computed: {
-    SearchFilter: function() {
+    SearchFilter: function () {
       /* If the search input is empty we return the entire list */
       if (!this.search) {
         return this.recipes.list[0];

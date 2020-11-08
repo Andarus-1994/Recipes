@@ -68,6 +68,7 @@ export default {
     addRandomRecipe: function () {
       if (this.mockedRecipes.length > 0) {
         var localRecipes;
+        /* n is a random number from 0 to the lenght of the array that gets fetched from  the mocked API */
         var n = Math.floor(Math.random() * this.mockedRecipes.length);
         this.recipes[0].push(this.mockedRecipes[n]);
         if (!localStorage["recipes"]) localRecipes = [];

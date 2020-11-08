@@ -1,41 +1,34 @@
 <template>
   <div class="home">
     <h1>Recipe Box</h1>
-    <div class="search-wrapper">
-      <label>Search:</label>
-      <input type="text" v-model="search" placeholder="Search title.." />
-      <label>Example of search: "flour,eggs,chocolate"</label>
-    </div>
+    <SearchBox :search="SearchWord" />
     <Loader v-if="recipes.loading" />
-    <ul v-if="!recipes.loading" class="recipe-list">
-      <li
-        v-for="(recipe, index) in SearchFilter"
-        :key="index"
-        @click="DetailIngredient(index)"
-      >
-        <h3>{{ recipe.recipe }}</h3>
-        <p>{{ recipe.description }}</p>
-      </li>
-    </ul>
+    <RecipeList
+      :loading="recipes.loading"
+      :recipes="SearchFilter"
+      :selectedRecipeIndex="DetailIngredient"
+    />
     <Details
       v-if="!recipes.loading"
       :number="number"
       :recipes="SearchFilter"
       :allRecipes="recipes.list"
     />
-    <div class="buttons"></div>
   </div>
 </template>
 
 <script>
 import Loader from "../components/Spinner.vue";
 import Details from "../components/Details.vue";
-
+import RecipeList from "../components/RecipeList.vue";
+import SearchBox from "../components/Search.vue";
 export default {
   name: "home",
   components: {
     Loader,
     Details,
+    RecipeList,
+    SearchBox,
   },
   data: () => {
     return {
@@ -87,7 +80,7 @@ export default {
       recipes: { loading: true, list: [] },
     };
   },
-  created: function () {
+  created: function() {
     if (localStorage.recipes) {
       /*if we find data into the local storage we push it to our array */
 
@@ -102,15 +95,18 @@ export default {
   },
 
   methods: {
-    DetailIngredient: function (index) {
+    DetailIngredient: function(index) {
       this.number = index;
     },
-    Hide: function () {
+    Hide: function() {
       this.hide = !this.hide;
+    },
+    SearchWord: function(word) {
+      this.search = word;
     },
   },
   computed: {
-    SearchFilter: function () {
+    SearchFilter: function() {
       /* If the search input is empty we return the entire list */
       if (!this.search) {
         return this.recipes.list[0];
@@ -146,60 +142,5 @@ export default {
   text-align: center;
   font-size: 4rem;
   font-family: "Lobster", cursive;
-}
-.home .search-wrapper {
-  width: 50%;
-  font-family: "Roboto", sans-serif;
-  margin: 30px auto;
-}
-
-.home .search-wrapper label {
-  font-size: 1rem;
-  padding: 10px 15px;
-  color: rgb(19, 61, 88);
-}
-.home .search-wrapper input {
-  font-size: 1rem;
-  padding: 5px 10px;
-  color: rgb(19, 61, 88);
-}
-
-.home ul {
-  background-color: rgb(37, 129, 165);
-  border-radius: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-column-gap: 50px;
-  grid-row-gap: 30px;
-  list-style-type: none;
-  overflow: auto;
-  height: 200px;
-  width: 60%;
-  min-width: 400px;
-  padding: 30px 10px;
-  margin: 0 auto;
-  box-shadow: 0px 0px 2px 0px black;
-}
-.home ul li {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 15px;
-  cursor: pointer;
-  padding: 5px 20px;
-  margin: 0px 5px;
-  font-size: 0.9rem;
-  font-family: "Roboto", sans-serif;
-  box-shadow: 0px 0px 2px 0px black;
-  transition: 0.6s;
-}
-
-.home ul li:hover {
-  color: rgb(38, 72, 124);
-  box-shadow: inset 0px 0px 6px black;
-}
-.home ul li h3 {
-  font-size: 1rem;
-  color: rgb(239, 244, 255);
 }
 </style>

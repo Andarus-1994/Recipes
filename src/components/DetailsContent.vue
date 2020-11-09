@@ -42,10 +42,13 @@ export default {
 }
 
 .detailsContent ul {
-  padding: 30px 40px;
+  padding: 30px 60px;
   min-height: 50px;
   list-style-type: none;
   margin: 0px 0;
+}
+.detailsContent ul:nth-of-type(1) li {
+  text-indent: -15px;
 }
 .detailsContent ul:nth-of-type(2) {
   list-style-type: decimal;

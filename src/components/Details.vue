@@ -33,6 +33,12 @@ export default {
 
 <style lang="css" scoped>
 .details {
+  background: -webkit-linear-gradient(
+    170deg,
+    rgb(6, 55, 75),
+    rgb(30, 105, 151)
+  );
+  background: linear-gradient(170deg, rgb(6, 55, 75), rgb(30, 105, 151));
   font-family: "Roboto", sans-serif;
   border-radius: 10px;
   list-style-type: none;

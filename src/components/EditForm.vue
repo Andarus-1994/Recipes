@@ -1,5 +1,5 @@
 <template>
-  <div class="change">
+  <div class="editForm">
     <button @click="Close" style="float: right">X</button>
     <h2>Modify your recipe...</h2>
     <div class="Inputs">
@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: "change",
+  name: "editForm",
 
   data: () => {
     return {
@@ -112,7 +112,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.change {
+.editForm {
   position: fixed;
   background: -webkit-linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
   background: linear-gradient(150deg, rgb(17, 79, 117), rgb(5, 43, 58));
@@ -128,7 +128,7 @@ export default {
   text-align: center;
 }
 
-.change button {
+.editForm button {
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -141,19 +141,19 @@ export default {
   border-bottom: 1px solid rgb(0, 0, 0);
   transition: 0.6s;
 }
-.change button:hover {
+.editForm button:hover {
   background-color: rgb(29, 106, 155);
 }
 
-.change .wrapperInput {
+.editForm .wrapperInput {
   margin: 15px 40px;
   display: flex;
   flex-direction: column;
 }
-.change .wrapperInput label {
+.editForm .wrapperInput label {
   font-size: 1.2rem;
 }
-.change .wrapperInput input {
+.editForm .wrapperInput input {
   font-family: "Roboto";
   color: white;
   background: rgb(24, 74, 116);
@@ -161,12 +161,12 @@ export default {
   padding: 5px;
   transition: 0.4s;
 }
-.change .wrapperInput input:focus {
+.editForm .wrapperInput input:focus {
   background: rgb(32, 96, 148);
   border: 1px solid rgb(0, 0, 0);
 }
 
-.change .wrapperInput textarea {
+.editForm .wrapperInput textarea {
   font-family: "Roboto";
   font-size: 0.85rem;
   color: rgb(255, 255, 255);
@@ -176,12 +176,12 @@ export default {
   padding: 5px;
   transition: 0.4s;
 }
-.change .wrapperInput textarea:focus {
+.editForm .wrapperInput textarea:focus {
   background: rgb(32, 96, 148);
   border: 1px solid rgb(0, 0, 0);
 }
 
-.change input[type="submit"] {
+.editForm input[type="submit"] {
   cursor: pointer;
   background-color: rgb(17, 79, 117);
   color: rgb(217, 226, 255);
@@ -190,7 +190,7 @@ export default {
   border: none;
   transition: 0.6s;
 }
-.change input[type="submit"]:hover {
+.editForm input[type="submit"]:hover {
   background-color: rgb(25, 111, 165);
 }
 </style>

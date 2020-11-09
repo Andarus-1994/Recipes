@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <Modify
+    <HeaderDetails
       :decreaseNumber="decreaseNumber"
       :number="number"
       :recipes="allRecipes"
@@ -12,14 +12,14 @@
 
 <script>
 import Add from "./Add";
-import Modify from "./Modify";
+import HeaderDetails from "./HeaderDetails";
 import DetailsContent from "./DetailsContent";
 
 export default {
   name: "recipeInfor",
   components: {
     DetailsContent,
-    Modify,
+    HeaderDetails,
     Add,
   },
   props: {
@@ -37,7 +37,6 @@ export default {
   border-radius: 10px;
   list-style-type: none;
   width: 60%;
-  min-width: 300px;
   margin: 20px auto;
   box-shadow: 0px 0px 5px 2px black;
 }

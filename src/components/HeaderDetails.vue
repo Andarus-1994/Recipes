@@ -13,8 +13,8 @@
       <font-awesome-icon icon="trash" />
     </button>
     <transition name="fade">
-      <Change
-        v-if="!hide.modify"
+      <EditForm
+        v-if="!hide.edit"
         :popChange="popChangeBox"
         :recipes="recipes"
         :number="number"
@@ -33,21 +33,21 @@
 
 <script>
 import ConfirmationBox from "./ConfirmationBox";
-import Change from "./Change";
+import EditForm from "./EditForm";
 import axios from "axios";
 
 export default {
-  name: "modify",
+  name: "headerDetails",
   data: () => {
     return {
-      hide: { modify: true, delete: true },
+      hide: { edit: true, delete: true },
 
       mockedRecipes: [],
     };
   },
   components: {
     ConfirmationBox,
-    Change,
+    EditForm,
   },
 
   props: {
@@ -55,7 +55,7 @@ export default {
     recipes: Array,
     decreaseNumber: Function,
   },
-  created: function () {
+  created: function() {
     axios
       .get("/api/recipes", {
         headers: { "Content-Type": "application/json" },
@@ -64,16 +64,16 @@ export default {
       .catch((error) => console.log(error));
   },
   methods: {
-    popDeleteConfirmation: function () {
-      if (!this.hide.modify) this.hide.modify = true;
+    popDeleteConfirmation: function() {
+      if (!this.hide.edit) this.hide.edit = true;
       this.hide.delete = !this.hide.delete;
     },
-    popChangeBox: function () {
+    popChangeBox: function() {
       if (!this.hide.delete) this.hide.delete = true;
-      this.hide.modify = !this.hide.modify;
+      this.hide.edit = !this.hide.edit;
     },
 
-    addRandomRecipe: function () {
+    addRandomRecipe: function() {
       if (this.mockedRecipes.length > 0) {
         var localRecipes;
         /* n is a random number from 0 to the lenght of the array that gets fetched from  the mocked API */

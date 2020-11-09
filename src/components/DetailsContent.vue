@@ -38,13 +38,14 @@ export default {
 
 <style lang="css" scoped>
 .detailsContent h1 {
-  margin: 5px 10px;
+  margin: 10px 30px;
 }
 
 .detailsContent ul {
-  min-height: 200px;
+  padding: 30px 40px;
+  min-height: 50px;
   list-style-type: none;
-  margin: 30px 0;
+  margin: 0px 0;
 }
 .detailsContent ul:nth-of-type(2) {
   list-style-type: decimal;

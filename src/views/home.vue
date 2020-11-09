@@ -11,7 +11,7 @@
     <Details
       v-if="!recipes.loading"
       :number="number"
-      :decreaseNumber="DecreaseNumber"
+      :increaseNumber="IncreaseNumber"
       :recipes="SearchFilter"
       :allRecipes="recipes.list"
     />
@@ -84,7 +84,6 @@ export default {
   created: function() {
     if (localStorage.recipes) {
       /*if we find data into the local storage we push it to our array */
-
       this.recipes.list.push(JSON.parse(localStorage.recipes));
       this.recipes.loading = false;
     } else {
@@ -105,8 +104,8 @@ export default {
     SearchWord: function(word) {
       this.search = word;
     },
-    DecreaseNumber: function() {
-      this.number = this.number - 1;
+    IncreaseNumber: function(x) {
+      this.number = this.number + x;
     },
   },
   computed: {

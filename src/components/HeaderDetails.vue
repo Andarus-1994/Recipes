@@ -1,13 +1,13 @@
 <template>
   <div class="modify">
-    <button @click="popChangeBox" :disabled="recipes[0].length ? false : true">
+    <button @click="popChangeBox" :disabled="recipes.length ? false : true">
       <font-awesome-icon icon="edit" />
     </button>
     <button @click="addRandomRecipe" title="Random Autocompleted Recipe">
       <font-awesome-icon icon="list-ol" />
     </button>
     <button
-      :disabled="recipes[0].length ? false : true"
+      :disabled="recipes.length ? false : true"
       @click="popDeleteConfirmation"
     >
       <font-awesome-icon icon="trash" />
@@ -23,9 +23,10 @@
       <ConfirmationBox
         v-if="!hide.delete"
         :recipe="recipes"
-        :decreaseNumber="decreaseNumber"
+        :increaseNumber="increaseNumber"
         :number="number"
         :popDelete="popDeleteConfirmation"
+        :allRecipes="allRecipes"
       />
     </transition>
   </div>
@@ -53,7 +54,8 @@ export default {
   props: {
     number: Number,
     recipes: Array,
-    decreaseNumber: Function,
+    increaseNumber: Function,
+    allRecipes: Array,
   },
   created: function() {
     axios
@@ -78,13 +80,13 @@ export default {
         var localRecipes;
         /* n is a random number from 0 to the lenght of the array that gets fetched from  the mocked API */
         var n = Math.floor(Math.random() * this.mockedRecipes.length);
-        this.recipes[0].push(this.mockedRecipes[n]);
+        this.recipes.push(this.mockedRecipes[n]);
         if (!localStorage["recipes"]) localRecipes = [];
         else localRecipes = JSON.parse(localStorage["recipes"]);
         if (!(localRecipes instanceof Array)) localRecipes = [];
         localRecipes.push(this.mockedRecipes[n]);
         localStorage.setItem("recipes", JSON.stringify(localRecipes));
-        console.log(n);
+        this.increaseNumber(1);
       }
     },
   },

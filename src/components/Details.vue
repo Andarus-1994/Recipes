@@ -1,9 +1,11 @@
 <template>
   <div class="details">
     <HeaderDetails
-      :decreaseNumber="decreaseNumber"
+      :increaseNumber="increaseNumber"
       :number="number"
-      :recipes="allRecipes"
+      :totalRecipesLength="allRecipes.length"
+      :recipes="recipes"
+      :allRecipes="allRecipes"
     />
     <DetailsContent :number="number" :recipes="recipes" />
     <Add :recipes="allRecipes" />
@@ -26,7 +28,7 @@ export default {
     number: Number,
     recipes: Array,
     allRecipes: Array,
-    decreaseNumber: Function,
+    increaseNumber: Function,
   },
 };
 </script>

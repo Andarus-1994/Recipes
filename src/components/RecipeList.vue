@@ -57,6 +57,7 @@ export default {
   cursor: pointer;
   padding: 5px 20px;
   margin: 0px 5px;
+  max-width: 400px;
   font-size: 0.9rem;
   font-family: "Roboto", sans-serif;
   box-shadow: 0px 0px 2px 0px black;

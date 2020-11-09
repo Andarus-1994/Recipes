@@ -1,7 +1,7 @@
 <template>
   <div class="confirmationBox">
     <p>
-      You are about to delete <u>{{ recipe[0][number].recipe }}</u
+      You are about to delete <u>{{ recipe[number].recipe }}</u
       >. <br />
       Are you sure?
     </p>
@@ -20,9 +20,11 @@ export default {
 
   props: {
     recipe: Array,
-    decreaseNumber: Function,
+    allRecipes: Array,
+    increaseNumber: Function,
     number: Number,
     popDelete: Function,
+    totalRecipesLength: Number,
   },
 
   methods: {
@@ -34,8 +36,8 @@ export default {
       if (deleteRecipe.length)
         localStorage.setItem("recipes", JSON.stringify(deleteRecipe));
       else localStorage.removeItem("recipes");
-      this.recipe[0].splice(this.number, 1);
-      if (!this.recipe[this.number]) this.decreaseNumber();
+      this.recipe.splice(this.number, 1);
+      if (this.number >= this.recipe.length) this.increaseNumber(-1);
       this.popDelete();
     },
   },

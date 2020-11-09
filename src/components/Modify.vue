@@ -1,10 +1,15 @@
 <template>
   <div class="modify">
-    <button @click="popChangeBox"><font-awesome-icon icon="edit" /></button>
+    <button @click="popChangeBox" :disabled="recipes[0].length ? false : true">
+      <font-awesome-icon icon="edit" />
+    </button>
     <button @click="addRandomRecipe" title="Random Autocompleted Recipe">
       <font-awesome-icon icon="list-ol" />
     </button>
-    <button @click="popDeleteConfirmation">
+    <button
+      :disabled="recipes[0].length ? false : true"
+      @click="popDeleteConfirmation"
+    >
       <font-awesome-icon icon="trash" />
     </button>
     <transition name="fade">
@@ -18,6 +23,7 @@
       <ConfirmationBox
         v-if="!hide.delete"
         :recipe="recipes"
+        :decreaseNumber="decreaseNumber"
         :number="number"
         :popDelete="popDeleteConfirmation"
       />
@@ -47,6 +53,7 @@ export default {
   props: {
     number: Number,
     recipes: Array,
+    decreaseNumber: Function,
   },
   created: function () {
     axios
@@ -105,6 +112,23 @@ export default {
 .modify button:nth-last-of-type(1) {
   float: right;
   color: rgb(255, 255, 255);
+}
+
+.modify button:nth-last-of-type(1):disabled {
+  cursor: not-allowed;
+  background-color: grey;
+  color: rgb(71, 71, 71);
+}
+.modify button:nth-last-of-type(1):disabled:hover {
+  transform: scale(1);
+}
+.modify button:nth-last-of-type(2):disabled {
+  cursor: not-allowed;
+  background-color: grey;
+  color: rgb(71, 71, 71);
+}
+.modify button:nth-last-of-type(2):disabled:hover {
+  transform: scale(1);
 }
 
 .modify button:nth-last-of-type(2):hover {

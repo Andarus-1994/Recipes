@@ -1,6 +1,7 @@
 <template>
   <div class="recipeList">
     <ul v-if="!loading" class="recipe-list">
+      <h1 v-if="!this.recipes[0]">Recipe list is empty</h1>
       <li
         v-for="(recipe, index) in recipes"
         :key="index"
@@ -40,6 +41,13 @@ export default {
   padding: 30px 10px;
   margin: 0 auto;
   box-shadow: 0px 0px 2px 0px black;
+}
+.recipeList ul h1 {
+  color: rgb(21, 59, 82);
+  text-align: center;
+  margin-top: 100px;
+  font-family: "Roboto";
+  font-size: 1.2rem;
 }
 .recipeList ul li {
   display: flex;

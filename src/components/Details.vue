@@ -1,6 +1,10 @@
 <template>
   <div class="details">
-    <Modify :number="number" :recipes="allRecipes" />
+    <Modify
+      :decreaseNumber="decreaseNumber"
+      :number="number"
+      :recipes="allRecipes"
+    />
     <DetailsContent :number="number" :recipes="recipes" />
     <Add :recipes="allRecipes" />
   </div>
@@ -22,6 +26,7 @@ export default {
     number: Number,
     recipes: Array,
     allRecipes: Array,
+    decreaseNumber: Function,
   },
 };
 </script>

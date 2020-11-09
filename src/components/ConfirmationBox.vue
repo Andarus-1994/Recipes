@@ -20,12 +20,13 @@ export default {
 
   props: {
     recipe: Array,
+    decreaseNumber: Function,
     number: Number,
     popDelete: Function,
   },
 
   methods: {
-    deleteRecipe: function () {
+    deleteRecipe: function() {
       var localRecipe = JSON.parse(localStorage["recipes"]);
       var deleteRecipe = localRecipe
         .slice(0, this.number)
@@ -34,6 +35,7 @@ export default {
         localStorage.setItem("recipes", JSON.stringify(deleteRecipe));
       else localStorage.removeItem("recipes");
       this.recipe[0].splice(this.number, 1);
+      if (!this.recipe[this.number]) this.decreaseNumber();
       this.popDelete();
     },
   },

@@ -12,10 +12,15 @@
       </li>
     </ul>
     <ul>
-      <h1>Directions</h1>
-      <li v-for="(direction, index) in recipes[number].directions" :key="index">
-        {{ direction }}
-      </li>
+      <div v-if="recipes[number]">
+        <h1>Directions</h1>
+        <li
+          v-for="(direction, index) in recipes[number].directions"
+          :key="index"
+        >
+          {{ direction }}
+        </li>
+      </div>
     </ul>
   </div>
 </template>
@@ -37,6 +42,7 @@ export default {
 }
 
 .detailsContent ul {
+  min-height: 200px;
   list-style-type: none;
   margin: 30px 0;
 }

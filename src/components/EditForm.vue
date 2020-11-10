@@ -8,7 +8,7 @@
           <label>Recipe name:</label>
           <input
             type="text"
-            v-model="recipes[0][number].recipe"
+            v-model="recipes[number].recipe"
             placeholder="Recipe..."
             required
           />
@@ -17,7 +17,7 @@
           <label>Description:</label>
           <textarea
             type="text"
-            v-model="recipes[0][number].description"
+            v-model="recipes[number].description"
             placeholder="Description..."
             required
           />
@@ -70,41 +70,39 @@ export default {
 
   created: function() {
     /* replaced the comma with a "/" in ingredients and directions in order to display them to the user (they are in an UL displayed) */
-    this.Ingredients = this.recipes[0][this.number].ingredients
+    this.Ingredients = this.recipes[this.number].ingredients
       .toString()
       .replace(/,/g, "/");
-    this.Directions = this.recipes[0][this.number].directions
+    this.Directions = this.recipes[this.number].directions
       .toString()
       .replace(/,/g, "/");
     /* here we save the initial recipe in case the user doesn't want to make a change anymore */
-    this.initialRecipe.recipe = this.recipes[0][this.number].recipe;
-    this.initialRecipe.description = this.recipes[0][this.number].description;
-    this.initialRecipe.ingredients = this.recipes[0][this.number].ingredients;
-    this.initialRecipe.directions = this.recipes[0][this.number].directions;
+    this.initialRecipe.recipe = this.recipes[this.number].recipe;
+    this.initialRecipe.description = this.recipes[this.number].description;
+    this.initialRecipe.ingredients = this.recipes[this.number].ingredients;
+    this.initialRecipe.directions = this.recipes[this.number].directions;
   },
   methods: {
     changeRecipe: function() {
       var localRecipes;
-      this.recipes[0][this.number].ingredients = this.Ingredients.trim().split(
+      this.recipes[this.number].ingredients = this.Ingredients.trim().split(
         "/"
       );
-      this.recipes[0][this.number].directions = this.Directions.trim().split(
-        "/"
-      );
+      this.recipes[this.number].directions = this.Directions.trim().split("/");
 
       if (!localStorage["recipes"]) localRecipes = [];
       else localRecipes = JSON.parse(localStorage["recipes"]);
       if (!(localRecipes instanceof Array)) localRecipes = [];
-      localRecipes[this.number] = this.recipes[0][this.number];
+      localRecipes[this.number] = this.recipes[this.number];
       localStorage.setItem("recipes", JSON.stringify(localRecipes));
       this.popChange();
     },
     Close: function() {
       /* here we assign the initial values and close the form */
-      this.recipes[0][this.number].recipe = this.initialRecipe.recipe;
-      this.recipes[0][this.number].description = this.initialRecipe.description;
-      this.recipes[0][this.number].ingredients = this.initialRecipe.ingredients;
-      this.recipes[0][this.number].directions = this.initialRecipe.directions;
+      this.recipes[this.number].recipe = this.initialRecipe.recipe;
+      this.recipes[this.number].description = this.initialRecipe.description;
+      this.recipes[this.number].ingredients = this.initialRecipe.ingredients;
+      this.recipes[this.number].directions = this.initialRecipe.directions;
       this.popChange();
     },
   },

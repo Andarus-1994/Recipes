@@ -34,7 +34,6 @@ export default {
   data: () => {
     return {
       search: "",
-      hide: true,
       /* I use this to keep the track on selected recipe index */
       number: 0,
       /* Here is an item list that I use as example in case the Recipe Storage is empty */
@@ -97,9 +96,6 @@ export default {
   methods: {
     DetailIngredient: function(index) {
       this.number = index;
-    },
-    Hide: function() {
-      this.hide = !this.hide;
     },
     SearchWord: function(word) {
       this.search = word;

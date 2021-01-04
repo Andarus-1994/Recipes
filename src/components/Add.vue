@@ -9,7 +9,7 @@
       <div class="Inputs">
         <form @submit.prevent="addRecipe">
           <div class="wrapperInput">
-            <label>Recipe name:</label>
+            <label>Recipe name:)</label>
             <input
               type="text"
               v-model="recipe.recipe"
